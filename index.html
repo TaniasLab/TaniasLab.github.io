@@ -9,7 +9,7 @@
     /* ====== Design Tokens ====== */
     :root {
       --brand-900: #0b1c36;  /* deep navy */
-      --brand-700: #143a66;
+      --brand-700: #38bdf8;
       --brand-500: #1f4d8a;  /* link / buttons */
       --accent-500: #13b0a5; /* teal accent */
       --bg: #ffffff;
@@ -22,6 +22,8 @@
       --focus: 0 0 0 3px rgba(19,176,165,.35);
     }
     :root.dark {
+      --text-strong: #e0f2fe; /* light cyan for strong text */
+    
       /* Adjust elevated backgrounds & borders for better contrast in dark mode */
       --bg: #0b1220;
       --bg-elev: #101929;
@@ -134,6 +136,65 @@
     /* ====== Utilities ====== */
     .sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0 }
   </style>
+<style>
+  /* === Overrides (added by ChatGPT) === */
+  :root {
+    --accent: #22d3ee; /* teal/cyan accent */
+    --accent-strong: #06b6d4;
+    --heading-strong: #e0f2fe; /* light-cyan heading for dark bg */
+    --chip-bg: rgba(34, 211, 238, 0.08);
+    --chip-border: rgba(34, 211, 238, 0.28);
+  }
+  :root.dark {
+    --brand-700: #7dd3fc; /* lighten blue for readability on near-black */
+  }
+  /* Header nav spacing */
+  header nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: clamp(1rem, 4vw, 3rem);
+  }
+  /* Hero heading contrast on dark */
+  .hero h1 {
+    color: var(--heading-strong, #e0f2fe);
+  }
+  /* Section label / small caps accent */
+  .eyebrow, .section .label, .section small.kicker {
+    color: var(--accent);
+    letter-spacing: .08em;
+  }
+  /* Experience bullets / icons */
+  .bullet, .bullet svg, .bullet::before {
+    color: var(--accent);
+    fill: var(--accent);
+    border-color: var(--accent);
+  }
+  /* Vertical rule in Experience section */
+  .experience .vr, .experience .rule {
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset;
+  }
+  /* Chips/tags */
+  .chip, .tag {
+    background: var(--chip-bg);
+    border: 1px solid var(--chip-border);
+  }
+  /* Buttons accent hover */
+  .btn.primary {
+    border: 1px solid var(--accent-strong);
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  }
+  .btn.primary:hover {
+    background: var(--accent-strong);
+    color: #001018;
+  }
+  /* Links hover underline accent */
+  a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+</style>
 </head>
 <body>
   <!-- Header -->
@@ -328,17 +389,7 @@
     </div>
   </section>
 
-  <!-- Contact -->
-  <section class="section" id="contact">
-    <div class="container">
-      <h2>Contact</h2>
-      <p class="lead">Interested in working together? Please reach out via my Upwork profile.</p>
-      <div class="card" style="display:flex; flex-direction:column; gap:12px">
-        <a class="btn primary" href="https://www.upwork.com/freelancers/~your_profile_id" target="_blank" rel="noopener">Work with me on Upwork</a>
-        <p class="muted" style="margin:0">For compliance with Upwork policies, I accept new project inquiries only via Upwork.</p>
-      </div>
-    </div>
-  </section>
+  
 
   <footer>
     <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
