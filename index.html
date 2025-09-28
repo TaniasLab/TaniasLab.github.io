@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tania — QA Engineer & Marketing Automation</title>
+  <meta name="description" content="Portfolio of Tania — Software QA Engineer & Marketing Automation Specialist: skills, case studies, projects, and contact." />
+  <style>
+    /* ====== Design Tokens ====== */
+    :root {
+      --brand-900: #0b1c36;  /* deep navy */
+      --brand-700: #143a66;
+      --brand-500: #1f4d8a;  /* link / buttons */
+      --accent-500: #13b0a5; /* teal accent */
+      --bg: #ffffff;
+      --bg-elev: #f6f8fb;
+      --text: #101828;
+      --muted: #4b5563;
+      --border: #e5e7eb;
+      --card-shadow: 0 6px 24px rgba(2, 6, 23, 0.08);
+      --radius: 16px;
+      --focus: 0 0 0 3px rgba(19,176,165,.35);
+    }
+    :root.dark {
+      --bg: #0b1220;
+      --bg-elev: #101929;
+      --text: #eef2ff;
+      --muted: #c7d2fe;
+      --border: #1f2a44;
+      --card-shadow: 0 10px 32px rgba(0,0,0,.45);
+    }
+
+    /* ====== Base ====== */
+    html, body { height: 100%; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    * { box-sizing: border-box; }
+    img { max-width: 100%; display: block; border-radius: 12px; }
+    a { color: var(--brand-500); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1120px, 92vw); margin-inline: auto; }
+    .pill { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .75rem; border:1px solid var(--border); border-radius: 999px; background: var(--bg-elev); font-size:.9rem; color: var(--muted);} 
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.85rem 1.1rem; border-radius: 12px; font-weight: 600; border:1px solid transparent; transition:.2s ease; }
+    .btn.primary { background: linear-gradient(180deg, var(--brand-500), var(--brand-700)); color:#fff; box-shadow: 0 8px 22px rgba(31,77,138,.25);} 
+    .btn.primary:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(31,77,138,.35);} 
+    .btn.ghost { background: transparent; border-color: var(--border); color: var(--text);} 
+    .btn.ghost:hover { background: var(--bg-elev);} 
+    .grid { display:grid; gap: 24px; }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    @media (max-width: 900px) { .grid.cols-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 720px) { .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; } }
+
+    .card { background: var(--bg); border:1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--card-shadow); }
+    .card h3 { margin: 0 0 8px; line-height: 1.25; }
+    .muted { color: var(--muted); }
+    .section { padding: 64px 0; }
+    .section h2 { font-size: clamp(1.5rem, 1rem + 2vw, 2.2rem); margin: 0 0 12px; }
+    .section p.lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 24px; }
+    .chips { display:flex; flex-wrap:wrap; gap:10px; }
+    .chip { padding:.4rem .7rem; border:1px solid var(--border); border-radius: 999px; background: var(--bg-elev); font-size:.85rem; }
+
+    /* ====== Header / Nav ====== */
+    header { position: sticky; top: 0; z-index: 40; backdrop-filter: saturate(180%) blur(8px); background: color-mix(in oklab, var(--bg) 86%, transparent); border-bottom:1px solid var(--border); }
+    .nav { display:flex; align-items:center; justify-content:space-between; height:64px; }
+    .brand { display:flex; align-items:center; gap:.6rem; font-weight:800; color: var(--brand-900); letter-spacing:.2px; }
+    :root.dark .brand { color: #e2e8f0; }
+    .brand svg { width: 24px; height: 24px; }
+    nav ul { display:flex; gap: 18px; list-style:none; margin:0; padding:0; }
+    nav a { color: var(--text); font-weight:600; opacity:.9 }
+    nav a:hover { opacity:1 }
+    .nav-actions { display:flex; align-items:center; gap:10px }
+    .theme-toggle { border:1px solid var(--border); background: var(--bg-elev); padding:.55rem; border-radius:12px; cursor:pointer; }
+
+    /* Mobile menu */
+    .menu-btn { display:none; border:1px solid var(--border); background: var(--bg-elev); border-radius:10px; padding:.5rem .7rem; }
+    @media (max-width: 900px){ nav ul { display:none } .menu-btn{ display:inline-flex } }
+    .mobile-nav { display:none; border-top:1px solid var(--border); padding:12px 0 16px; }
+    .mobile-nav.open { display:block; }
+    .mobile-nav a { display:block; padding:10px 0; }
+
+    /* ====== Hero ====== */
+    .hero { padding: 72px 0 36px; }
+    .hero-wrap { display:grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items:center; }
+    @media (max-width: 960px){ .hero-wrap { grid-template-columns: 1fr; } }
+    .kicker { letter-spacing: .12em; text-transform: uppercase; font-size:.85rem; color: var(--brand-500); font-weight:700; }
+    .hero h1 { font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); line-height:1.1; margin:.35rem 0 .6rem; }
+    .hero p { color: var(--muted); font-size: 1.1rem; margin: 0 0 1.2rem; }
+    .hero .cta { display:flex; gap:12px; flex-wrap:wrap; }
+    .hero-figure { aspect-ratio: 4/3; background: linear-gradient(180deg, var(--bg-elev), transparent); border:1px dashed var(--border); border-radius: var(--radius); display:grid; place-items:center; color: var(--muted); }
+
+    /* ====== Timeline / Experience ====== */
+    .timeline { position:relative; padding-left: 22px; }
+    .timeline:before { content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background: var(--border); }
+    .timeline-item { position:relative; margin: 0 0 18px; }
+    .timeline-item:before{ content:""; position:absolute; left:-2px; top:.4rem; width:10px; height:10px; background: var(--accent-500); border-radius:999px; box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-500) 25%, transparent); }
+    .timeline h4 { margin:0 0 4px; }
+    .timeline .muted { font-size:.95rem }
+
+    /* ====== Footer ====== */
+    footer { border-top:1px solid var(--border); padding: 36px 0; color: var(--muted); }
+
+    /* ====== Utilities ====== */
+    .sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0 }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12c4-8 12-8 16 0M4 12c4 8 12 8 16 0"/><circle cx="12" cy="12" r="2.25"/></svg>
+        <span>Tania · QA & Marketing</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#qa">QA</a></li>
+          <li><a href="#marketing">Marketing Automation</a></li>
+          <li><a href="#work">Case Studies</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">Menu</button>
+      </div>
+    </div>
+    <div class="container mobile-nav" id="mobileNav" aria-label="Mobile">
+      <a href="#about">About</a>
+      <a href="#qa">QA</a>
+      <a href="#marketing">Marketing Automation</a>
+      <a href="#work">Case Studies</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero container" id="top">
+    <div class="hero-wrap">
+      <div>
+        <span class="kicker">Software QA • Marketing Automation</span>
+        <h1>Hi, I'm Tania — I help teams ship reliable products and convert traffic into customers.</h1>
+        <p>8+ years in manual QA (web & API) + a practical focus on funnels, payments and email automation. I mix risk‑based testing with clear bug reports and lightweight automation.</p>
+        <div class="cta">
+          <a class="btn primary" href="#contact">Work with me</a>
+          <a class="btn ghost" href="#work">View case studies</a>
+          <a class="btn ghost" href="#resume" aria-label="Jump to resume section">Resume</a>
+        </div>
+        <div style="margin-top:14px" class="chips">
+          <span class="chip">Postman</span>
+          <span class="chip">Chrome DevTools</span>
+          <span class="chip">JIRA / TestRail</span>
+          <span class="chip">Playwright (basics)</span>
+          <span class="chip">Unbounce • ClickFunnels</span>
+          <span class="chip">ActiveCampaign</span>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <span class="muted">Your photo / logo here</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="grid cols-2">
+        <div>
+          <h2>About</h2>
+          <p class="lead">Calm, systematic, and curious. I focus on preventing expensive bugs, improving developer feedback loops, and making releases boring—in a good way. On the marketing side, I test end‑to‑end funnels (ad → landing → webhook → email) so money isn’t lost between tools.</p>
+          <div class="chips" aria-label="Highlights">
+            <span class="pill">ISTQB Foundation</span>
+            <span class="pill">E‑commerce & SaaS</span>
+            <span class="pill">Payment flows</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 id="resume">Snapshot</h3>
+          <ul>
+            <li><strong>QA:</strong> exploratory, regression, smoke, acceptance; API checks in Postman; bug reporting that devs love.</li>
+            <li><strong>Automation:</strong> Playwright basics; selectors, waits, assertions; CI hooks (Jenkins).</li>
+            <li><strong>Marketing:</strong> landing pages (Unbounce/CF), forms & webhooks, email automations (ActiveCampaign), analytics sanity checks.</li>
+          </ul>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px">
+            <a class="btn primary" href="#contact">Hire me</a>
+            <a class="btn ghost" href="#" download>Download CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QA Section -->
+  <section class="section" id="qa">
+    <div class="container">
+      <h2>QA Engineering</h2>
+      <p class="lead">Risk‑based strategies, crisp test design, and fast feedback. I combine structured test suites with exploratory sessions to find high‑impact issues early.</p>
+      <div class="grid cols-3" style="margin-top:18px">
+        <article class="card">
+          <h3>Exploratory & Regression</h3>
+          <p class="muted">Mind maps, charters, boundary/value tests. I keep living checklists for fast smoke/regression cycles.</p>
+          <div class="chips"><span class="chip">Heuristics</span><span class="chip">Mind maps</span><span class="chip">Risk matrix</span></div>
+        </article>
+        <article class="card">
+          <h3>API Testing (Postman)</h3>
+          <p class="muted">Collections, environments, schema checks, monitors with alerts. Useful for auth, payments, and core endpoints.</p>
+          <div class="chips"><span class="chip">Newman/CI</span><span class="chip">Mock servers</span><span class="chip">Monitors</span></div>
+        </article>
+        <article class="card">
+          <h3>Lightweight Automation</h3>
+          <p class="muted">Playwright basics for happy‑path UI checks and critical flows. Focused on stability and signal‑to‑noise.</p>
+          <div class="chips"><span class="chip">Selectors</span><span class="chip">Waits</span><span class="chip">Assertions</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketing Section -->
+  <section class="section" id="marketing">
+    <div class="container">
+      <h2>Marketing Automation</h2>
+      <p class="lead">From click to inbox: I validate funnels end‑to‑end to ensure forms, webhooks, and email automations don’t leak leads.</p>
+      <div class="grid cols-3" style="margin-top:18px">
+        <article class="card">
+          <h3>Landing Pages</h3>
+          <p class="muted">Unbounce / ClickFunnels: forms, UTM capture, validation, A/B sanity, page speed basics.</p>
+          <div class="chips"><span class="chip">UTM</span><span class="chip">A/B</span><span class="chip">Lighthouse</span></div>
+        </article>
+        <article class="card">
+          <h3>Webhooks & APIs</h3>
+          <p class="muted">Verify payloads, auth, retries, and mapping to CRM. Postman collections for repeatable checks.</p>
+          <div class="chips"><span class="chip">JSON</span><span class="chip">Auth</span><span class="chip">Error paths</span></div>
+        </article>
+        <article class="card">
+          <h3>Email Automations</h3>
+          <p class="muted">ActiveCampaign: tags, lists, journeys; deliverability checks; test recipients & previews.</p>
+          <div class="chips"><span class="chip">SPF/DKIM</span><span class="chip">Segments</span><span class="chip">Events</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  <section class="section" id="work">
+    <div class="container">
+      <h2>Case Studies</h2>
+      <p class="lead">A few quick snapshots. I’m happy to walk through details live.</p>
+      <div class="grid cols-3" style="margin-top:18px">
+        <article class="card">
+          <h3>Checkout flow: defects ↓35%</h3>
+          <p class="muted">Introduced a risk matrix and high‑impact tests; added API checks for payment gateway. Fewer hotfixes in 2 sprints.</p>
+          <a class="btn ghost" href="#">Read more</a>
+        </article>
+        <article class="card">
+          <h3>API quality: Postman monitors</h3>
+          <p class="muted">Built monitors for auth/billing/projects; Slack alerts; basic schema validation caught 3 breaking changes pre‑release.</p>
+          <a class="btn ghost" href="#">Read more</a>
+        </article>
+        <article class="card">
+          <h3>Funnel testing: ad → email</h3>
+          <p class="muted">Mapped UTM capture, form validations, webhook payloads, and email deliverability. Conversion +18% after fixes.</p>
+          <a class="btn ghost" href="#">Read more</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience timeline (optional) -->
+  <section class="section">
+    <div class="container grid cols-2">
+      <div>
+        <h2>Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4>QA Engineer — E‑commerce / SaaS</h4>
+            <div class="muted">Manual QA, API checks, release validation</div>
+          </div>
+          <div class="timeline-item">
+            <h4>QA + Marketing Automation — Freelance</h4>
+            <div class="muted">Landing pages, forms & webhooks, ActiveCampaign</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Toolbox</h3>
+        <div class="chips">
+          <span class="chip">Postman</span>
+          <span class="chip">JIRA</span>
+          <span class="chip">TestRail</span>
+          <span class="chip">GitHub</span>
+          <span class="chip">Jenkins</span>
+          <span class="chip">DevTools</span>
+          <span class="chip">Charles Proxy</span>
+          <span class="chip">Unbounce</span>
+          <span class="chip">ClickFunnels</span>
+          <span class="chip">ActiveCampaign</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="lead">Interested in working together? Drop me a message — I usually reply within 1–2 business days.</p>
+      <div class="card">
+        <form action="https://formspree.io/f/your-id" method="POST" style="display:grid; gap:14px">
+          <label>
+            <span class="sr-only">Your name</span>
+            <input required name="name" placeholder="Your name" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--bg-elev); color:var(--text)" />
+          </label>
+          <label>
+            <span class="sr-only">Your email</span>
+            <input required type="email" name="email" placeholder="Email" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--bg-elev); color:var(--text)" />
+          </label>
+          <label>
+            <span class="sr-only">Message</span>
+            <textarea required name="message" rows="5" placeholder="Tell me about your project" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--bg-elev); color:var(--text)"></textarea>
+          </label>
+          <button class="btn primary" type="submit">Send message</button>
+          <p class="muted" style="margin:0">Or email me: <a href="mailto:tania.qa@example.com">tania.qa@example.com</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <div>© <span id="year"></span> Tania. All rights reserved.</div>
+      <div class="muted">Built with HTML/CSS. Deployed on GitHub Pages / Netlify.</div>
+    </div>
+  </footer>
+
+  <script>
+    // ====== Theme ======
+    const root = document.documentElement;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const saved = localStorage.getItem('theme');
+    if ((saved === 'dark') || (!saved && prefersDark)) { root.classList.add('dark'); }
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // ====== Mobile menu ======
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
