@@ -9,7 +9,7 @@
     /* ====== Design Tokens ====== */
     :root {
       --brand-900: #0b1c36;  /* deep navy */
-      --brand-700: #143a66;
+      --brand-700: #38bdf8;
       --brand-500: #1f4d8a;  /* link / buttons */
       --accent-500: #13b0a5; /* teal accent */
       --bg: #ffffff;
@@ -22,6 +22,26 @@
       --focus: 0 0 0 3px rgba(19,176,165,.35);
     }
     :root.dark {
+      --text-strong: #e0f2fe; /* light cyan for strong text */
+    
+      /* Adjust elevated backgrounds & borders for better contrast in dark mode */
+      --bg: #0b1220;
+      --bg-elev: #101929;
+      --text: #eef2ff;
+      --muted: #c7d2fe;
+      --border: #1f2a44;
+      --card-shadow: 0 10px 32px rgba(0,0,0,.45);
+    }
+    /* Dark-mode specific adjustments */
+    @media (prefers-color-scheme: dark) {
+      .hero { background: linear-gradient(135deg, #0f172a, #0b1220); }
+      .section.alt { background: #0f172a; }
+    }
+    :root.dark .hero { background: linear-gradient(135deg, #0f172a, #0b1220); }
+    :root.dark .section.alt { background: #0f172a; }
+    :root.dark footer { background: #0b1220; color: #cbd5e1; } 
+    :root.dark .section h2 { color: #c7d2fe; }
+    
       --bg: #0b1220;
       --bg-elev: #101929;
       --text: #eef2ff;
@@ -117,64 +137,158 @@
     .sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0 }
   </style>
 <style>
-/* === Header theme-aware sticky === */
+  /* === Overrides (added by ChatGPT) === */
+  :root {
+    --accent: #22d3ee; /* teal/cyan accent */
+    --accent-strong: #06b6d4;
+    --heading-strong: #e0f2fe; /* light-cyan heading for dark bg */
+    --chip-bg: rgba(34, 211, 238, 0.08);
+    --chip-border: rgba(34, 211, 238, 0.28);
+  }
+  :root.dark {
+    --brand-700: #7dd3fc; /* lighten blue for readability on near-black */
+  }
+  /* Header nav spacing */
+  header nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: clamp(1rem, 4vw, 3rem);
+  }
+  /* Hero heading contrast on dark */
+  .hero h1 {
+    color: var(--heading-strong, #e0f2fe);
+  }
+  /* Section label / small caps accent */
+  .eyebrow, .section .label, .section small.kicker {
+    color: var(--accent);
+    letter-spacing: .08em;
+  }
+  /* Experience bullets / icons */
+  .bullet, .bullet svg, .bullet::before {
+    color: var(--accent);
+    fill: var(--accent);
+    border-color: var(--accent);
+  }
+  /* Vertical rule in Experience section */
+  .experience .vr, .experience .rule {
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset;
+  }
+  /* Chips/tags */
+  .chip, .tag {
+    background: var(--chip-bg);
+    border: 1px solid var(--chip-border);
+  }
+  /* Buttons accent hover */
+  .btn.primary {
+    border: 1px solid var(--accent-strong);
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  }
+  .btn.primary:hover {
+    background: var(--accent-strong);
+    color: #001018;
+  }
+  /* Links hover underline accent */
+  a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+</style>
+<style>
+  /* === Sticky header hardening === */
+  header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 2000;
+    background: #0a0f1aee; /* solid with slight alpha */
+    backdrop-filter: saturate(120%) blur(6px);
+    box-shadow: 0 2px 12px rgba(0,0,0,.35);
+  }
+  /* add top offset to main content so it doesn't hide under header */
+  main { padding-top: clamp(64px, 9vh, 88px); }
+
+  /* === Experience bullets: prevent overlap === */
+  .experience ul, .experience ol { list-style: none; padding: 0; margin: 0; }
+  .experience li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 14px 0 24px 0;
+  }
+  .experience .bullet {
+    flex: 0 0 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    border-radius: 999px;
+    background: radial-gradient(ellipse at 35% 35%, rgba(34,211,238,.35), rgba(34,211,238,.12));
+    box-shadow: inset 0 0 0 2px rgba(34,211,238,.45);
+    color: #001018;
+  }
+  .experience .bullet svg { width: 16px; height: 16px; }
+  .experience .title, .experience h3 { margin: 0; line-height: 1.25; }
+  .experience .vr, .experience .rule {
+    margin-left: 18px; /* push rule so it doesn't collide with bullet */
+    border-left: 2px solid rgba(34,211,238,.28);
+  }
+
+</style>
+<style>
+/* === ChatGPT overrides (sticky header, bullets, spacing) === */
 header{
   position: sticky !important;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 3000;
-  background: var(--hdr-bg, rgba(255,255,255,.86));
-  backdrop-filter: saturate(120%) blur(8px);
-  -webkit-backdrop-filter: saturate(120%) blur(8px);
-  box-shadow: 0 1px 0 rgba(0,0,0,.08);
-  transition: background .2s ease, box-shadow .2s ease;
+  background: #0a0f1a; /* solid dark */
+  box-shadow: 0 1px 0 #1f2a44;
 }
-:root.dark header{
-  --hdr-bg: rgba(10,15,26,.92);
-  box-shadow: 0 1px 0 rgba(255,255,255,.04);
+/* Offset for sticky header */
+main{ padding-top: clamp(64px, 8vh, 84px); }
+
+/* Spread nav items and add room near the moon toggle */
+header nav{
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: clamp(1rem, 4vw, 3rem);
+  padding-right: 32px; /* space before the moon/toggle */
 }
-main{ padding-top: clamp(64px, 8vh, 88px); }
-header nav{ gap: clamp(1rem, 4vw, 3rem); padding-right: 32px; }
+header nav a:last-child{ margin-right: 28px; }
 
-
-/* === Buttons: solid professional blue === */
-.btn, button.btn, a.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:.8rem 1.25rem; border-radius:12px;
-  font-weight:600; text-decoration:none; border:1px solid #0A66FF;
-  background:#0A66FF; color:#fff; box-shadow:0 6px 18px rgba(10,102,255,.15);
+/* Experience bullets: prevent icon/text overlap */
+.experience li,
+.experience .item,
+.experience .entry,
+.experience .row{ 
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  list-style: none;
 }
-.btn:hover{ background:#0056D6; border-color:#0056D6; color:#fff; }
-.btn.ghost{ background:transparent; color:#0A66FF; border-color:#0A66FF22; }
-.btn.ghost:hover{ background:#0A66FF11; border-color:#0A66FF55; }
-:root.dark .btn.ghost{ color:#7da7ff; }
-/* Optional subtle gradient modifier */
-.btn.grad{ 
-  background: linear-gradient(180deg, #007BFF 0%, #0062CC 100%);
-  border-color:#0062CC;
-}
-
-
-/* === Heading gradient utility (opt-in) === */
-.text-gradient{
-  background: linear-gradient(90deg, #2f6fff 0%, #6e8bff 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-
-
-/* === Experience layout fixes === */
-.experience{ position:relative; }
-.experience .items{ list-style:none; padding:0; margin:0; }
-.experience .item{ display:flex; gap:14px; align-items:flex-start; margin:20px 0 26px 0; }
 .experience .bullet{
-  flex:0 0 30px; height:30px; margin-left:10px;
-  display:inline-flex; align-items:center; justify-content:center;
-  border-radius:999px;
-  background:#0b172a; border:2px solid rgba(34,211,238,.45);
-  box-shadow:0 4px 12px rgba(0,0,0,.25), inset 0 0 0 2px rgba(34,211,238,.25);
+  flex: 0 0 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 4px 0 4px; /* drop a bit so it doesn't hit baseline */
+  border-radius: 999px;
+  background: radial-gradient(ellipse at 35% 35%, rgba(34,211,238,.35), rgba(34,211,238,.12));
+  box-shadow: inset 0 0 0 2px rgba(34,211,238,.45);
 }
-.experience .bullet svg{ width:16px; height:16px; color:#22d3ee; }
-.experience .rule{ position:absolute; left:28px; top:0; bottom:0; border-left:2px solid rgba(34,211,238,.18); }
-.experience h3, .experience .title{ margin:0; line-height:1.25; }
+.experience .vr, .experience .rule{ 
+  margin-left: 18px;
+  border-left: 2px solid rgba(34,211,238,.28);
+}
+.experience h3, .experience .title{ margin: 0; line-height: 1.25; }
 
 </style>
 </head>
@@ -192,7 +306,6 @@ header nav{ gap: clamp(1rem, 4vw, 3rem); padding-right: 32px; }
           <li><a href="#qa">QA</a></li>
           <li><a href="#marketing">Marketing Automation</a></li>
           <li><a href="#work">Case Studies</a></li>
-          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
       <div class="nav-actions">
@@ -204,9 +317,7 @@ header nav{ gap: clamp(1rem, 4vw, 3rem); padding-right: 32px; }
       <a href="#about">About</a>
       <a href="#qa">QA</a>
       <a href="#marketing">Marketing Automation</a>
-      <a href="#work">Case Studies</a>
-      <a href="#contact">Contact</a>
-    </div>
+      <a href="#work">Case Studies</a></div>
   </header>
 
   <!-- Hero -->
@@ -217,7 +328,6 @@ header nav{ gap: clamp(1rem, 4vw, 3rem); padding-right: 32px; }
         <h1>Hi, I'm Tania — I help teams ship reliable products and convert traffic into customers.</h1>
         <p>8+ years in manual QA (web & API) + a practical focus on funnels, payments and email automation. I mix risk‑based testing with clear bug reports and lightweight automation.</p>
         <div class="cta">
-          <a class="btn primary" href="#contact">Work with me</a>
           <a class="btn ghost" href="#work">View case studies</a>
           <a class="btn ghost" href="#resume" aria-label="Jump to resume section">Resume</a>
         </div>
@@ -257,7 +367,6 @@ header nav{ gap: clamp(1rem, 4vw, 3rem); padding-right: 32px; }
             <li><strong>Marketing:</strong> landing pages (Unbounce/CF), forms & webhooks, email automations (ActiveCampaign), analytics sanity checks.</li>
           </ul>
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px">
-            <a class="btn primary" href="#contact">Hire me</a>
             <a class="btn ghost" href="#" download>Download CV (PDF)</a>
           </div>
         </div>
@@ -374,31 +483,7 @@ header nav{ gap: clamp(1rem, 4vw, 3rem); padding-right: 32px; }
     </div>
   </section>
 
-  <!-- Contact -->
-  <section class="section" id="contact">
-    <div class="container">
-      <h2>Contact</h2>
-      <p class="lead">Interested in working together? Drop me a message — I usually reply within 1–2 business days.</p>
-      <div class="card">
-        <form action="https://formspree.io/f/your-id" method="POST" style="display:grid; gap:14px">
-          <label>
-            <span class="sr-only">Your name</span>
-            <input required name="name" placeholder="Your name" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--bg-elev); color:var(--text)" />
-          </label>
-          <label>
-            <span class="sr-only">Your email</span>
-            <input required type="email" name="email" placeholder="Email" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--bg-elev); color:var(--text)" />
-          </label>
-          <label>
-            <span class="sr-only">Message</span>
-            <textarea required name="message" rows="5" placeholder="Tell me about your project" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--bg-elev); color:var(--text)"></textarea>
-          </label>
-          <button class="btn primary" type="submit">Send message</button>
-          <p class="muted" style="margin:0">Or email me: <a href="mailto:tania.qa@example.com">tania.qa@example.com</a></p>
-        </form>
-      </div>
-    </div>
-  </section>
+  
 
   <footer>
     <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
