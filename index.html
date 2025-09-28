@@ -22,6 +22,24 @@
       --focus: 0 0 0 3px rgba(19,176,165,.35);
     }
     :root.dark {
+      /* Adjust elevated backgrounds & borders for better contrast in dark mode */
+      --bg: #0b1220;
+      --bg-elev: #101929;
+      --text: #eef2ff;
+      --muted: #c7d2fe;
+      --border: #1f2a44;
+      --card-shadow: 0 10px 32px rgba(0,0,0,.45);
+    }
+    /* Dark-mode specific adjustments */
+    @media (prefers-color-scheme: dark) {
+      .hero { background: linear-gradient(135deg, #0f172a, #0b1220); }
+      .section.alt { background: #0f172a; }
+    }
+    :root.dark .hero { background: linear-gradient(135deg, #0f172a, #0b1220); }
+    :root.dark .section.alt { background: #0f172a; }
+    :root.dark footer { background: #0b1220; color: #cbd5e1; } 
+    :root.dark .section h2 { color: #c7d2fe; }
+    
       --bg: #0b1220;
       --bg-elev: #101929;
       --text: #eef2ff;
@@ -131,7 +149,6 @@
           <li><a href="#qa">QA</a></li>
           <li><a href="#marketing">Marketing Automation</a></li>
           <li><a href="#work">Case Studies</a></li>
-          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
       <div class="nav-actions">
@@ -143,9 +160,7 @@
       <a href="#about">About</a>
       <a href="#qa">QA</a>
       <a href="#marketing">Marketing Automation</a>
-      <a href="#work">Case Studies</a>
-      <a href="#contact">Contact</a>
-    </div>
+      <a href="#work">Case Studies</a></div>
   </header>
 
   <!-- Hero -->
@@ -317,24 +332,10 @@
   <section class="section" id="contact">
     <div class="container">
       <h2>Contact</h2>
-      <p class="lead">Interested in working together? Drop me a message — I usually reply within 1–2 business days.</p>
-      <div class="card">
-        <form action="https://formspree.io/f/your-id" method="POST" style="display:grid; gap:14px">
-          <label>
-            <span class="sr-only">Your name</span>
-            <input required name="name" placeholder="Your name" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--bg-elev); color:var(--text)" />
-          </label>
-          <label>
-            <span class="sr-only">Your email</span>
-            <input required type="email" name="email" placeholder="Email" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--bg-elev); color:var(--text)" />
-          </label>
-          <label>
-            <span class="sr-only">Message</span>
-            <textarea required name="message" rows="5" placeholder="Tell me about your project" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--bg-elev); color:var(--text)"></textarea>
-          </label>
-          <button class="btn primary" type="submit">Send message</button>
-          <p class="muted" style="margin:0">Or email me: <a href="mailto:tania.qa@example.com">tania.qa@example.com</a></p>
-        </form>
+      <p class="lead">Interested in working together? Please reach out via my Upwork profile.</p>
+      <div class="card" style="display:flex; flex-direction:column; gap:12px">
+        <a class="btn primary" href="https://www.upwork.com/freelancers/~your_profile_id" target="_blank" rel="noopener">Work with me on Upwork</a>
+        <p class="muted" style="margin:0">For compliance with Upwork policies, I accept new project inquiries only via Upwork.</p>
       </div>
     </div>
   </section>
