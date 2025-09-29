@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marketing Automation — Tania</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+  :root{
+      --bg: #ffffff;
+      --surface: #f7fafc;
+      --text: #0b1220;
+      --muted:#5b6876;
+      --line:#e7edf3;
+      --chip:#eef4fb;
+      --brand:#2563eb;
+      --brand-strong:#1e3a8a;
+      --brand-soft:#3b82f6;
+      --shadow: 0 10px 30px rgba(2, 8, 23, .06);
+      --gradient-hero: linear-gradient(180deg, rgba(243,246,252,0.96) 0%, #ffffff 100%);
+  }
+  [data-theme="dark"]{
+      --bg:#0a0f1a;
+      --surface:#1e293b;
+      --text:#f9fafb;
+      --muted:#9ca3af;
+      --line:#334155;
+      --chip:#273549;
+      --shadow: 0 10px 30px rgba(0,0,0,.6);
+      --gradient-hero: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial;transition:background .3s,color .3s}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);backdrop-filter:blur(12px);transition:background .3s}
+  .nav .wrap{max-width:1140px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+  .brand .dot{width:10px;height:10px;border-radius:999px;background:var(--brand)}
+  .nav ul{margin-left:auto;display:flex;gap:26px;list-style:none;padding:0}
+  .nav a{font-weight:600;color:var(--text)}
+  .nav a:hover{color:var(--brand)}
+  .mode{margin-left:12px;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 10px;cursor:pointer;transition:background .3s}
+  .container{max-width:1140px;margin:0 auto;padding:28px 20px}
+  .hero{background:var(--gradient-hero);border-bottom:1px solid var(--line);padding:80px 0;transition:background .3s}
+  .eyebrow{font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--brand-strong);text-transform:uppercase}
+  h1{font-size:clamp(32px,5vw,54px);line-height:1.15;margin:12px 0 18px;font-weight:800;background:linear-gradient(90deg, var(--brand-strong), var(--brand));-webkit-background-clip:text;color:transparent;transition:color .3s,background .3s}
+  .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:920px;transition:color .3s}
+  .section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .section h2{font-size:clamp(26px,3vw,34px);margin:0 0 10px}
+  .section .sub{color:var(--muted);margin:0 0 24px}
+  .cards{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:900px){.cards{grid-template-columns:1fr 1fr 1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;color:var(--text);transition:background .3s,color .3s,border .3s}
+  .card h3{margin:0 0 6px}
+  .meta{font-size:14px;color:var(--muted);margin-bottom:8px}
+  .pill{display:inline-block;background:var(--chip);border:1px solid var(--line);padding:5px 10px;border-radius:999px;font-size:13px;margin-right:6px;margin-top:6px}
+  .foot{padding:28px 0;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+  
+  <nav class="nav">
+    <div class="wrap">
+      <div class="brand"><span class="dot"></span> Tania • QA & Marketing</div>
+      <ul>
+        <li><a href="index.html">About</a></li>
+        <li><a href="qa.html">QA</a></li>
+        <li><a href="marketing.html">Marketing Automation</a></li>
+        <li><a href="index.html#cases">Case Studies</a></li>
+      </ul>
+      <button class="mode" id="mode" aria-label="Toggle theme">☾</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">Portfolio • Marketing Automation</div>
+      <h1>Lean automation that turns traffic into paying users.</h1>
+      <p class="lead">Funnels, email sequences, lightweight analytics, payments & deliverability checks. Clear experiments, dependable tracking.</p>
+    </div>
+  </header>
+
+  <section class="section container">
+    <h2>Selected MA work</h2>
+    <p class="sub">Value‑focused examples with clean tracking.</p>
+    <div class="cards">
+      <article class="card">
+        <h3>Lead magnet → nurture → offer</h3>
+        <p class="meta">Email • Segmentation • Timing</p>
+        <p><strong>Context:</strong> Low activation after signup.<br>
+        <strong>What I did:</strong> 3‑step lifecycle with tags, delays and split‑tests; trimmed content for deliverability; aligned UTMs across assets.<br>
+        <strong>Tools:</strong> ActiveCampaign, Unbounce/ClickFunnels, GA.<br>
+        <strong>Result:</strong> +14% activation within 30 days.</p>
+      </article>
+      <article class="card">
+        <h3>Payments integration sanity</h3>
+        <p class="meta">Checkout • Webhooks</p>
+        <p><strong>Context:</strong> Missing receipts and broken failure paths.<br>
+        <strong>What I did:</strong> Verified success/failure flows, webhook retries and email timing; added smoke checks for receipts.<br>
+        <strong>Tools:</strong> Stripe/LiqPay, Webhooks, Postman.<br>
+        <strong>Result:</strong> Receipt failures down 70%, cleaner attribution.</p>
+      </article>
+      <article class="card">
+        <h3>Landing A/B quick wins</h3>
+        <p class="meta">Hypotheses • Low‑risk tests</p>
+        <p><strong>Context:</strong> Flat CVR on main landing.<br>
+        <strong>What I did:</strong> Headline/CTA hierarchy tests with rollback safety and consistent UTM naming.<br>
+        <strong>Tools:</strong> A/B platform, GA, heatmaps.<br>
+        <strong>Result:</strong> +8–12% CVR on tested segments.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="container foot">
+    <a href="index.html">← Back to Home</a>
+  </footer>
+  
+  <script>
+    // theme toggle
+    const themeBtn=document.getElementById('mode');
+    themeBtn?.addEventListener('click',()=>{
+      const root=document.documentElement;
+      const cur=root.getAttribute('data-theme')||'light';
+      root.setAttribute('data-theme', cur==='light'?'dark':'light');
+    });
+    // smooth anchors (if any)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const el=document.querySelector(a.getAttribute('href'));
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      })
+    })
+  </script>
+
+</body>
+</html>

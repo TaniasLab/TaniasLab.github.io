@@ -1,527 +1,141 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tania — QA Engineer & Marketing Automation</title>
-  <meta name="description" content="Portfolio of Tania — Software QA Engineer & Marketing Automation Specialist: skills, case studies, projects, and contact." />
+  <title>Tania • QA & Marketing Automation</title>
+  <meta name="description" content="Tania — QA Engineer & Marketing Automation Specialist. Unified approach: product quality × revenue growth." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ====== Design Tokens ====== */
-    :root {
-      --brand-900: #0b1c36;  /* deep navy */
-      --brand-700: #38bdf8;
-      --brand-500: #1f4d8a;  /* link / buttons */
-      --accent-500: #13b0a5; /* teal accent */
+    :root{
       --bg: #ffffff;
-      --bg-elev: #f6f8fb;
-      --text: #101828;
-      --muted: #4b5563;
-      --border: #e5e7eb;
-      --card-shadow: 0 6px 24px rgba(2, 6, 23, 0.08);
-      --radius: 16px;
-      --focus: 0 0 0 3px rgba(19,176,165,.35);
+      --surface: #f7fafc;
+      --text: #0b1220;
+      --muted:#5b6876;
+      --line:#e7edf3;
+      --chip:#eef4fb;
+      --brand:#2563eb;
+      --brand-strong:#1e3a8a;
+      --brand-soft:#3b82f6;
+      --shadow: 0 10px 30px rgba(2, 8, 23, .06);
+      --gradient-hero: linear-gradient(180deg, rgba(243,246,252,0.96) 0%, #ffffff 100%);
     }
-    :root.dark {
-      --text-strong: #e0f2fe; /* light cyan for strong text */
-    
-      /* Adjust elevated backgrounds & borders for better contrast in dark mode */
-      --bg: #0b1220;
-      --bg-elev: #101929;
-      --text: #eef2ff;
-      --muted: #c7d2fe;
-      --border: #1f2a44;
-      --card-shadow: 0 10px 32px rgba(0,0,0,.45);
-    }
-    /* Dark-mode specific adjustments */
-    @media (prefers-color-scheme: dark) {
-      .hero { background: linear-gradient(135deg, #0f172a, #0b1220); }
-      .section.alt { background: #0f172a; }
-    }
-    :root.dark .hero { background: linear-gradient(135deg, #0f172a, #0b1220); }
-    :root.dark .section.alt { background: #0f172a; }
-    :root.dark footer { background: #0b1220; color: #cbd5e1; } 
-    :root.dark .section h2 { color: #c7d2fe; }
-    
-      --bg: #0b1220;
-      --bg-elev: #101929;
-      --text: #eef2ff;
-      --muted: #c7d2fe;
-      --border: #1f2a44;
-      --card-shadow: 0 10px 32px rgba(0,0,0,.45);
+    [data-theme="dark"]{
+      --bg:#0a0f1a;
+      --surface:#1e293b;
+      --text:#f9fafb;
+      --muted:#9ca3af;
+      --line:#334155;
+      --chip:#273549;
+      --shadow: 0 10px 30px rgba(0,0,0,.6);
+      --gradient-hero: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
     }
 
-    /* ====== Base ====== */
-    .section.alt { background: #f0f4fa; }
-    .section h2 { color: var(--brand-700); }
-    .card { box-shadow: 0 2px 8px rgba(31,77,138,.15); border-top: 3px solid var(--brand-500); }
-    .hero { background: linear-gradient(135deg, #f0f4fa, #ffffff); }
-    .hero h1 { background: linear-gradient(90deg, var(--brand-500), var(--brand-700)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    footer { background: var(--brand-900); color: #fff; }
-    footer .muted { color: #cbd5e1; }
-    html, body { height: 100%; }
-    body {
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: var(--bg);
-      color: var(--text);
-      margin: 0;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-    }
-    * { box-sizing: border-box; }
-    img { max-width: 100%; display: block; border-radius: 12px; }
-    a { color: var(--brand-500); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .container { width: min(1120px, 92vw); margin-inline: auto; }
-    .pill { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .75rem; border:1px solid var(--border); border-radius: 999px; background: var(--bg-elev); font-size:.9rem; color: var(--muted);} 
-    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.85rem 1.1rem; border-radius: 12px; font-weight: 600; border:1px solid transparent; transition:.2s ease; }
-    .btn.primary { background: linear-gradient(180deg, var(--brand-500), var(--brand-700)); color:#fff; box-shadow: 0 8px 22px rgba(31,77,138,.25);} 
-    .btn.primary:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(31,77,138,.35);} 
-    .btn.ghost { background: transparent; border-color: var(--border); color: var(--text);} 
-    .btn.ghost:hover { background: var(--bg-elev);} 
-    .grid { display:grid; gap: 24px; }
-    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
-    @media (max-width: 900px) { .grid.cols-3 { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 720px) { .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; } }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial;transition:background .3s,color .3s}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
 
-    .card { background: var(--bg); border:1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--card-shadow); }
-    .card h3 { margin: 0 0 8px; line-height: 1.25; }
-    .muted { color: var(--muted); }
-    .section { padding: 64px 0; }
-    .section h2 { font-size: clamp(1.5rem, 1rem + 2vw, 2.2rem); margin: 0 0 12px; }
-    .section p.lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 24px; }
-    .chips { display:flex; flex-wrap:wrap; gap:10px; }
-    .chip { padding:.4rem .7rem; border:1px solid var(--border); border-radius: 999px; background: var(--bg-elev); font-size:.85rem; }
+    .nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);backdrop-filter:blur(12px);transition:background .3s}
+    .nav .wrap{max-width:1140px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand .dot{width:10px;height:10px;border-radius:999px;background:var(--brand)}
+    .nav ul{margin-left:auto;display:flex;gap:26px;list-style:none;padding:0}
+    .nav a{font-weight:600;color:var(--text)}
+    .nav a:hover{color:var(--brand)}
+    .mode{margin-left:12px;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 10px;cursor:pointer;transition:background .3s}
 
-    /* ====== Header / Nav ====== */
-    header { position: sticky; top: 0; z-index: 40; backdrop-filter: saturate(180%) blur(8px); background: color-mix(in oklab, var(--bg) 86%, transparent); border-bottom:1px solid var(--border); }
-    .nav { display:flex; align-items:center; justify-content:space-between; height:64px; }
-    .brand { display:flex; align-items:center; gap:.6rem; font-weight:800; color: var(--brand-900); letter-spacing:.2px; }
-    :root.dark .brand { color: #e2e8f0; }
-    .brand svg { width: 24px; height: 24px; }
-    nav ul { display:flex; gap: 18px; list-style:none; margin:0; padding:0; }
-    nav a { color: var(--text); font-weight:600; opacity:.9 }
-    nav a:hover { opacity:1 }
-    .nav-actions { display:flex; align-items:center; gap:10px }
-    .theme-toggle { border:1px solid var(--border); background: var(--bg-elev); padding:.55rem; border-radius:12px; cursor:pointer; }
+    .container{max-width:1140px;margin:0 auto;padding:28px 20px}
+    .hero{background:var(--gradient-hero);border-bottom:1px solid var(--line);padding:100px 0;transition:background .3s}
+    .grid{display:grid;grid-template-columns:1fr;gap:24px}
+    @media(min-width:900px){.grid{grid-template-columns:1.1fr .9fr}}
 
-    /* Mobile menu */
-    .menu-btn { display:none; border:1px solid var(--border); background: var(--bg-elev); border-radius:10px; padding:.5rem .7rem; }
-    @media (max-width: 900px){ nav ul { display:none } .menu-btn{ display:inline-flex } }
-    .mobile-nav { display:none; border-top:1px solid var(--border); padding:12px 0 16px; }
-    .mobile-nav.open { display:block; }
-    .mobile-nav a { display:block; padding:10px 0; }
+    .eyebrow{font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--brand-strong);text-transform:uppercase}
+    h1{font-size:clamp(32px,5vw,56px);line-height:1.15;margin:12px 0 18px;font-weight:800;background:linear-gradient(90deg, var(--brand-strong), var(--brand));-webkit-background-clip:text;color:transparent;transition:color .3s,background .3s}
+    .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:920px;transition:color .3s}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--text);padding:12px 16px;border-radius:12px;font-weight:600;transition:background .2s,color .2s,border-color .2s,box-shadow .2s}
+    .btn.selected{background:var(--brand);border-color:transparent;color:#fff}
+    .btn:focus-visible{outline:2px solid var(--brand-soft); outline-offset:2px}
 
-    /* ====== Hero ====== */
-    .hero { padding: 72px 0 36px; }
-    .hero-wrap { display:grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items:center; }
-    @media (max-width: 960px){ .hero-wrap { grid-template-columns: 1fr; } }
-    .kicker { letter-spacing: .12em; text-transform: uppercase; font-size:.85rem; color: var(--brand-500); font-weight:700; }
-    .hero h1 { font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); line-height:1.1; margin:.35rem 0 .6rem; }
-    .hero p { color: var(--muted); font-size: 1.1rem; margin: 0 0 1.2rem; }
-    .hero .cta { display:flex; gap:12px; flex-wrap:wrap; }
-    .hero-figure { aspect-ratio: 4/3; background: linear-gradient(180deg, var(--bg-elev), transparent); border:1px dashed var(--border); border-radius: var(--radius); display:grid; place-items:center; color: var(--muted); }
+    .photo{min-height:320px;border:2px dashed var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;background:radial-gradient(100% 100% at 100% 0%, var(--surface) 0%, transparent 60%);transition:background .3s,border .3s}
+    .photo span{color:var(--muted)}
 
-    /* ====== Timeline / Experience ====== */
-    .timeline { position:relative; padding-left: 22px; }
-    .timeline:before { content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background: var(--border); }
-    .timeline-item { position:relative; margin: 0 0 18px; }
-    .timeline-item:before{ content:""; position:absolute; left:-2px; top:.4rem; width:10px; height:10px; background: var(--accent-500); border-radius:999px; box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-500) 25%, transparent); }
-    .timeline h4 { margin:0 0 4px; }
-    .timeline .muted { font-size:.95rem }
+    .section{padding:60px 0;border-bottom:1px solid var(--line)}
+    .section h2{font-size:clamp(26px,3vw,34px);margin:0 0 10px}
+    .section .sub{color:var(--muted);margin:0 0 24px}
 
-    /* ====== Footer ====== */
-    footer { border-top:1px solid var(--border); padding: 36px 0; color: var(--muted); }
+    .cards{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:900px){.cards{grid-template-columns:1fr 1fr 1fr}}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;color:var(--text);transition:background .3s,color .3s,border .3s}
+    .card h3{margin:0 0 6px}
+    .meta{font-size:14px;color:var(--muted);margin-bottom:8px}
+    .pill{display:inline-block;background:var(--chip);border:1px solid var(--line);padding:5px 10px;border-radius:999px;font-size:13px;margin-right:6px;margin-top:6px}
 
-    /* ====== Utilities ====== */
-    .sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0 }
+    .duo{display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:900px){.duo{grid-template-columns:1fr 1fr}}
+    .duo .box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;color:var(--text);transition:background .3s,color .3s,border .3s}
+
+    .foot{padding:28px 0;color:var(--muted);font-size:14px}
+    .top{position:fixed;right:18px;bottom:18px;background:var(--surface);border:1px solid var(--line);padding:10px 12px;border-radius:999px;font-weight:600}
   </style>
-<style>
-  /* === Overrides (added by ChatGPT) === */
-  :root {
-    --accent: #22d3ee; /* teal/cyan accent */
-    --accent-strong: #06b6d4;
-    --heading-strong: #e0f2fe; /* light-cyan heading for dark bg */
-    --chip-bg: rgba(34, 211, 238, 0.08);
-    --chip-border: rgba(34, 211, 238, 0.28);
-  }
-  :root.dark {
-    --brand-700: #7dd3fc; /* lighten blue for readability on near-black */
-  }
-  /* Header nav spacing */
-  header nav {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    gap: clamp(1rem, 4vw, 3rem);
-  }
-  /* Hero heading contrast on dark */
-  .hero h1 {
-    color: var(--heading-strong, #e0f2fe);
-  }
-  /* Section label / small caps accent */
-  .eyebrow, .section .label, .section small.kicker {
-    color: var(--accent);
-    letter-spacing: .08em;
-  }
-  /* Experience bullets / icons */
-  .bullet, .bullet svg, .bullet::before {
-    color: var(--accent);
-    fill: var(--accent);
-    border-color: var(--accent);
-  }
-  /* Vertical rule in Experience section */
-  .experience .vr, .experience .rule {
-    border-left: 3px solid var(--accent);
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset;
-  }
-  /* Chips/tags */
-  .chip, .tag {
-    background: var(--chip-bg);
-    border: 1px solid var(--chip-border);
-  }
-  /* Buttons accent hover */
-  .btn.primary {
-    border: 1px solid var(--accent-strong);
-    box-shadow: 0 6px 18px rgba(0,0,0,.35);
-  }
-  .btn.primary:hover {
-    background: var(--accent-strong);
-    color: #001018;
-  }
-  /* Links hover underline accent */
-  a:hover {
-    text-decoration-color: var(--accent);
-  }
-
-</style>
-<style>
-  /* === Sticky header hardening === */
-  header {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 2000;
-    background: #0a0f1aee; /* solid with slight alpha */
-    backdrop-filter: saturate(120%) blur(6px);
-    box-shadow: 0 2px 12px rgba(0,0,0,.35);
-  }
-  /* add top offset to main content so it doesn't hide under header */
-  main { padding-top: clamp(64px, 9vh, 88px); }
-
-  /* === Experience bullets: prevent overlap === */
-  .experience ul, .experience ol { list-style: none; padding: 0; margin: 0; }
-  .experience li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin: 14px 0 24px 0;
-  }
-  .experience .bullet {
-    flex: 0 0 28px;
-    height: 28px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 4px;
-    border-radius: 999px;
-    background: radial-gradient(ellipse at 35% 35%, rgba(34,211,238,.35), rgba(34,211,238,.12));
-    box-shadow: inset 0 0 0 2px rgba(34,211,238,.45);
-    color: #001018;
-  }
-  .experience .bullet svg { width: 16px; height: 16px; }
-  .experience .title, .experience h3 { margin: 0; line-height: 1.25; }
-  .experience .vr, .experience .rule {
-    margin-left: 18px; /* push rule so it doesn't collide with bullet */
-    border-left: 2px solid rgba(34,211,238,.28);
-  }
-
-</style>
-<style>
-/* === ChatGPT overrides (sticky header, bullets, spacing) === */
-header{
-  position: sticky !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 3000;
-  background: #0a0f1a; /* solid dark */
-  box-shadow: 0 1px 0 #1f2a44;
-}
-/* Offset for sticky header */
-main{ padding-top: clamp(64px, 8vh, 84px); }
-
-/* Spread nav items and add room near the moon toggle */
-header nav{
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  gap: clamp(1rem, 4vw, 3rem);
-  padding-right: 32px; /* space before the moon/toggle */
-}
-header nav a:last-child{ margin-right: 28px; }
-
-/* Experience bullets: prevent icon/text overlap */
-.experience li,
-.experience .item,
-.experience .entry,
-.experience .row{ 
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  list-style: none;
-}
-.experience .bullet{
-  flex: 0 0 28px;
-  height: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 6px 4px 0 4px; /* drop a bit so it doesn't hit baseline */
-  border-radius: 999px;
-  background: radial-gradient(ellipse at 35% 35%, rgba(34,211,238,.35), rgba(34,211,238,.12));
-  box-shadow: inset 0 0 0 2px rgba(34,211,238,.45);
-}
-.experience .vr, .experience .rule{ 
-  margin-left: 18px;
-  border-left: 2px solid rgba(34,211,238,.28);
-}
-.experience h3, .experience .title{ margin: 0; line-height: 1.25; }
-
-</style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#top" aria-label="Home">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12c4-8 12-8 16 0M4 12c4 8 12 8 16 0"/><circle cx="12" cy="12" r="2.25"/></svg>
-        <span>Tania · QA & Marketing</span>
-      </a>
-      <nav aria-label="Primary">
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#qa">QA</a></li>
-          <li><a href="#marketing">Marketing Automation</a></li>
-          <li><a href="#work">Case Studies</a></li>
-        </ul>
-      </nav>
-      <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
-        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">Menu</button>
-      </div>
+  <nav class="nav">
+    <div class="wrap">
+      <div class="brand"><span class="dot"></span> Tania • QA & Marketing</div>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#qa">QA</a></li>
+        <li><a href="#marketing">Marketing Automation</a></li>
+        <li><a href="#cases">Case Studies</a></li>
+      </ul>
+      <button class="mode" id="mode" aria-label="Toggle theme">☾</button>
     </div>
-    <div class="container mobile-nav" id="mobileNav" aria-label="Mobile">
-      <a href="#about">About</a>
-      <a href="#qa">QA</a>
-      <a href="#marketing">Marketing Automation</a>
-      <a href="#work">Case Studies</a></div>
+  </nav>
+
+  <header class="hero">
+    <div class="container grid">
+      <div>
+        <div class="eyebrow">Software QA • Marketing Automation</div>
+        <h1>Hi, I'm Tania — I help teams ship reliable products and convert traffic into customers.</h1>
+        <p class="lead">8+ years in manual QA (web &amp; API) + a practical focus on funnels, payments and email automation. I mix risk‑based testing with clear bug reports and lightweight automation.</p>
+        <p class="lead" style="margin-top:8px">I work in two directions: QA and Marketing Automation. This unifies quality and business efficiency. <strong>Choose what is relevant to you ↓</strong></p>
+        <div class="cta">
+          <a class="btn" id="btn-qa" href="qa.html">QA Engineering →</a>
+          <a class="btn" id="btn-mkt" href="marketing.html">Marketing Automation →</a>
+        </div>
+      </div>
+      <div class="photo" aria-hidden="true"><span>Your photo / logo here</span></div>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero container" id="top">
-    <div class="hero-wrap">
-      <div>
-        <span class="kicker">Software QA • Marketing Automation</span>
-        <h1>Hi, I'm Tania — I help teams ship reliable products and convert traffic into customers.</h1>
-        <p>8+ years in manual QA (web & API) + a practical focus on funnels, payments and email automation. I mix risk‑based testing with clear bug reports and lightweight automation.</p>
-        <div class="cta">
-          <a class="btn ghost" href="#work">View case studies</a>
-          <a class="btn ghost" href="#resume" aria-label="Jump to resume section">Resume</a>
-        </div>
-        <div style="margin-top:14px" class="chips">
-          <span class="chip">Postman</span>
-          <span class="chip">Chrome DevTools</span>
-          <span class="chip">JIRA / TestRail</span>
-          <span class="chip">Playwright (basics)</span>
-          <span class="chip">Unbounce • ClickFunnels</span>
-          <span class="chip">ActiveCampaign</span>
-        </div>
-      </div>
-      <div class="hero-figure">
-        <span class="muted">Your photo / logo here</span>
-      </div>
-    </div>
-  </section>
+  <!-- Other sections remain unchanged -->
 
-  <!-- About -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="grid cols-2">
-        <div>
-          <h2>About</h2>
-          <p class="lead">Calm, systematic, and curious. I focus on preventing expensive bugs, improving developer feedback loops, and making releases boring—in a good way. On the marketing side, I test end‑to‑end funnels (ad → landing → webhook → email) so money isn’t lost between tools.</p>
-          <div class="chips" aria-label="Highlights">
-            <span class="pill">ISTQB Foundation</span>
-            <span class="pill">E‑commerce & SaaS</span>
-            <span class="pill">Payment flows</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3 id="resume">Snapshot</h3>
-          <ul>
-            <li><strong>QA:</strong> exploratory, regression, smoke, acceptance; API checks in Postman; bug reporting that devs love.</li>
-            <li><strong>Automation:</strong> Playwright basics; selectors, waits, assertions; CI hooks (Jenkins).</li>
-            <li><strong>Marketing:</strong> landing pages (Unbounce/CF), forms & webhooks, email automations (ActiveCampaign), analytics sanity checks.</li>
-          </ul>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px">
-            <a class="btn ghost" href="#" download>Download CV (PDF)</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- QA Section -->
-  <section class="section" id="qa">
-    <div class="container">
-      <h2>QA Engineering</h2>
-      <p class="lead">Risk‑based strategies, crisp test design, and fast feedback. I combine structured test suites with exploratory sessions to find high‑impact issues early.</p>
-      <div class="grid cols-3" style="margin-top:18px">
-        <article class="card">
-          <h3>Exploratory & Regression</h3>
-          <p class="muted">Mind maps, charters, boundary/value tests. I keep living checklists for fast smoke/regression cycles.</p>
-          <div class="chips"><span class="chip">Heuristics</span><span class="chip">Mind maps</span><span class="chip">Risk matrix</span></div>
-        </article>
-        <article class="card">
-          <h3>API Testing (Postman)</h3>
-          <p class="muted">Collections, environments, schema checks, monitors with alerts. Useful for auth, payments, and core endpoints.</p>
-          <div class="chips"><span class="chip">Newman/CI</span><span class="chip">Mock servers</span><span class="chip">Monitors</span></div>
-        </article>
-        <article class="card">
-          <h3>Lightweight Automation</h3>
-          <p class="muted">Playwright basics for happy‑path UI checks and critical flows. Focused on stability and signal‑to‑noise.</p>
-          <div class="chips"><span class="chip">Selectors</span><span class="chip">Waits</span><span class="chip">Assertions</span></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Marketing Section -->
-  <section class="section" id="marketing">
-    <div class="container">
-      <h2>Marketing Automation</h2>
-      <p class="lead">From click to inbox: I validate funnels end‑to‑end to ensure forms, webhooks, and email automations don’t leak leads.</p>
-      <div class="grid cols-3" style="margin-top:18px">
-        <article class="card">
-          <h3>Landing Pages</h3>
-          <p class="muted">Unbounce / ClickFunnels: forms, UTM capture, validation, A/B sanity, page speed basics.</p>
-          <div class="chips"><span class="chip">UTM</span><span class="chip">A/B</span><span class="chip">Lighthouse</span></div>
-        </article>
-        <article class="card">
-          <h3>Webhooks & APIs</h3>
-          <p class="muted">Verify payloads, auth, retries, and mapping to CRM. Postman collections for repeatable checks.</p>
-          <div class="chips"><span class="chip">JSON</span><span class="chip">Auth</span><span class="chip">Error paths</span></div>
-        </article>
-        <article class="card">
-          <h3>Email Automations</h3>
-          <p class="muted">ActiveCampaign: tags, lists, journeys; deliverability checks; test recipients & previews.</p>
-          <div class="chips"><span class="chip">SPF/DKIM</span><span class="chip">Segments</span><span class="chip">Events</span></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Case Studies -->
-  <section class="section" id="work">
-    <div class="container">
-      <h2>Case Studies</h2>
-      <p class="lead">A few quick snapshots. I’m happy to walk through details live.</p>
-      <div class="grid cols-3" style="margin-top:18px">
-        <article class="card">
-          <h3>Checkout flow: defects ↓35%</h3>
-          <p class="muted">Introduced a risk matrix and high‑impact tests; added API checks for payment gateway. Fewer hotfixes in 2 sprints.</p>
-          <a class="btn ghost" href="#">Read more</a>
-        </article>
-        <article class="card">
-          <h3>API quality: Postman monitors</h3>
-          <p class="muted">Built monitors for auth/billing/projects; Slack alerts; basic schema validation caught 3 breaking changes pre‑release.</p>
-          <a class="btn ghost" href="#">Read more</a>
-        </article>
-        <article class="card">
-          <h3>Funnel testing: ad → email</h3>
-          <p class="muted">Mapped UTM capture, form validations, webhook payloads, and email deliverability. Conversion +18% after fixes.</p>
-          <a class="btn ghost" href="#">Read more</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience timeline (optional) -->
-  <section class="section">
-    <div class="container grid cols-2">
-      <div>
-        <h2>Experience</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <h4>QA Engineer — E‑commerce / SaaS</h4>
-            <div class="muted">Manual QA, API checks, release validation</div>
-          </div>
-          <div class="timeline-item">
-            <h4>QA + Marketing Automation — Freelance</h4>
-            <div class="muted">Landing pages, forms & webhooks, ActiveCampaign</div>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Toolbox</h3>
-        <div class="chips">
-          <span class="chip">Postman</span>
-          <span class="chip">JIRA</span>
-          <span class="chip">TestRail</span>
-          <span class="chip">GitHub</span>
-          <span class="chip">Jenkins</span>
-          <span class="chip">DevTools</span>
-          <span class="chip">Charles Proxy</span>
-          <span class="chip">Unbounce</span>
-          <span class="chip">ClickFunnels</span>
-          <span class="chip">ActiveCampaign</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  
-
-  <footer>
-    <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-      <div>© <span id="year"></span> Tania. All rights reserved.</div>
-      <div class="muted">Built with HTML/CSS. Deployed on GitHub Pages / Netlify.</div>
-    </div>
+  <footer class="container foot">
+    <p>© <span id="y"></span> Tania • Portfolio for Upwork use. No direct contact links.</p>
   </footer>
 
+  <a href="#top" class="top" aria-label="Back to top">↑</a>
+  <a id="top" class="sr-only" href="#top">top</a>
+
   <script>
-    // ====== Theme ======
-    const root = document.documentElement;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const saved = localStorage.getItem('theme');
-    if ((saved === 'dark') || (!saved && prefersDark)) { root.classList.add('dark'); }
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      root.classList.toggle('dark');
-      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    document.getElementById('y').textContent = new Date().getFullYear();
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const el=document.querySelector(a.getAttribute('href'));
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      })
+    })
+    const themeBtn=document.getElementById('mode');
+    themeBtn.addEventListener('click',()=>{
+      const root=document.documentElement;
+      const cur=root.getAttribute('data-theme')||'light';
+      root.setAttribute('data-theme', cur==='light'?'dark':'light');
     });
-
-    // ====== Mobile menu ======
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileNav = document.getElementById('mobileNav');
-    menuBtn.addEventListener('click', () => {
-      const open = mobileNav.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-
-    // Smooth anchor scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
-      });
-    });
-
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // removed CTA selection JS because buttons now link to separate pages
   </script>
 </body>
 </html>

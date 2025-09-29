@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QA Portfolio — Tania</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+  :root{
+      --bg: #ffffff;
+      --surface: #f7fafc;
+      --text: #0b1220;
+      --muted:#5b6876;
+      --line:#e7edf3;
+      --chip:#eef4fb;
+      --brand:#2563eb;
+      --brand-strong:#1e3a8a;
+      --brand-soft:#3b82f6;
+      --shadow: 0 10px 30px rgba(2, 8, 23, .06);
+      --gradient-hero: linear-gradient(180deg, rgba(243,246,252,0.96) 0%, #ffffff 100%);
+  }
+  [data-theme="dark"]{
+      --bg:#0a0f1a;
+      --surface:#1e293b;
+      --text:#f9fafb;
+      --muted:#9ca3af;
+      --line:#334155;
+      --chip:#273549;
+      --shadow: 0 10px 30px rgba(0,0,0,.6);
+      --gradient-hero: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial;transition:background .3s,color .3s}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);backdrop-filter:blur(12px);transition:background .3s}
+  .nav .wrap{max-width:1140px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+  .brand .dot{width:10px;height:10px;border-radius:999px;background:var(--brand)}
+  .nav ul{margin-left:auto;display:flex;gap:26px;list-style:none;padding:0}
+  .nav a{font-weight:600;color:var(--text)}
+  .nav a:hover{color:var(--brand)}
+  .mode{margin-left:12px;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 10px;cursor:pointer;transition:background .3s}
+  .container{max-width:1140px;margin:0 auto;padding:28px 20px}
+  .hero{background:var(--gradient-hero);border-bottom:1px solid var(--line);padding:80px 0;transition:background .3s}
+  .eyebrow{font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--brand-strong);text-transform:uppercase}
+  h1{font-size:clamp(32px,5vw,54px);line-height:1.15;margin:12px 0 18px;font-weight:800;background:linear-gradient(90deg, var(--brand-strong), var(--brand));-webkit-background-clip:text;color:transparent;transition:color .3s,background .3s}
+  .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:920px;transition:color .3s}
+  .section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .section h2{font-size:clamp(26px,3vw,34px);margin:0 0 10px}
+  .section .sub{color:var(--muted);margin:0 0 24px}
+  .cards{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:900px){.cards{grid-template-columns:1fr 1fr 1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;color:var(--text);transition:background .3s,color .3s,border .3s}
+  .card h3{margin:0 0 6px}
+  .meta{font-size:14px;color:var(--muted);margin-bottom:8px}
+  .pill{display:inline-block;background:var(--chip);border:1px solid var(--line);padding:5px 10px;border-radius:999px;font-size:13px;margin-right:6px;margin-top:6px}
+  .foot{padding:28px 0;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+  
+  <nav class="nav">
+    <div class="wrap">
+      <div class="brand"><span class="dot"></span> Tania • QA & Marketing</div>
+      <ul>
+        <li><a href="index.html">About</a></li>
+        <li><a href="qa.html">QA</a></li>
+        <li><a href="marketing.html">Marketing Automation</a></li>
+        <li><a href="index.html#cases">Case Studies</a></li>
+      </ul>
+      <button class="mode" id="mode" aria-label="Toggle theme">☾</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">Portfolio • QA Engineering</div>
+      <h1>Practical QA that protects business‑critical flows.</h1>
+      <p class="lead">Manual web & API testing, exploratory & risk‑based approach, clear bug reports and CI‑ready mindset.</p>
+    </div>
+  </header>
+
+  <section class="section container">
+    <h2>Selected QA work</h2>
+    <p class="sub">Outcome‑oriented examples. No sensitive client details.</p>
+    <div class="cards">
+      <article class="card">
+        <h3>Checkout flow — functional test suite</h3>
+        <p class="meta">Web • E‑commerce • Payments</p>
+        <p><strong>Context:</strong> Intermittent failures in promo/receipt paths.<br>
+        <strong>What I did:</strong> Designed risk‑based suite for cart → checkout → confirmation, including negative paths and visual receipts.<br>
+        <strong>Tools:</strong> Postman, Chrome DevTools, TestRail.<br>
+        <strong>Result:</strong> 30% fewer support tickets within two sprints.</p>
+      </article>
+      <article class="card">
+        <h3>API smoke & contract checks</h3>
+        <p class="meta">API • JSON • Environments</p>
+        <p><strong>Context:</strong> Frequent schema drift between services.<br>
+        <strong>What I did:</strong> Environment‑driven Postman collections with assertions for status, schema and boundaries; mock servers for edge cases.<br>
+        <strong>Tools:</strong> Postman, JSON Schema, CI.<br>
+        <strong>Result:</strong> Caught a breaking change pre‑release; manual checks reduced by 40%.</p>
+      </article>
+      <article class="card">
+        <h3>Bug report gallery (before → after)</h3>
+        <p class="meta">Clarity • Reproducibility • Impact</p>
+        <p><strong>Context:</strong> Sluggish fixes due to unclear tickets.<br>
+        <strong>What I did:</strong> Standardised report format with exact repro steps, expected vs actual, severity rationale, attachments and env details.<br>
+        <strong>Tools:</strong> JIRA, screenshots/video, templates.<br>
+        <strong>Result:</strong> 2× faster time‑to‑fix for P2‑P3 issues.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="container foot">
+    <a href="index.html">← Back to Home</a>
+  </footer>
+  
+  <script>
+    // theme toggle
+    const themeBtn=document.getElementById('mode');
+    themeBtn?.addEventListener('click',()=>{
+      const root=document.documentElement;
+      const cur=root.getAttribute('data-theme')||'light';
+      root.setAttribute('data-theme', cur==='light'?'dark':'light');
+    });
+    // smooth anchors (if any)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const el=document.querySelector(a.getAttribute('href'));
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      })
+    })
+  </script>
+
+</body>
+</html>
