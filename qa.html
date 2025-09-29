@@ -1,8 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#0c1220">
+  <script>
+/* Set theme BEFORE paint to avoid white flash */
+(function () {
+  try {
+    var saved = localStorage.getItem('theme');
+    var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = saved || (systemDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+    var bg = theme === 'dark' ? '#0c1220' : '#ffffff';
+    document.documentElement.style.backgroundColor = bg;
+  } catch(e){}
+})();
+</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,6 +27,7 @@
   --bg:#ffffff; --surface:#f7fafc; --text:#0b1220; --muted:#5b6876; --line:#e7edf3;
   --brand:#2563eb; --brand-soft:#3b82f6; --brand-strong:#1e3a8a;
   --gradient-hero:linear-gradient(180deg, rgba(243,246,252,.96) 0%, #ffffff 100%);
+  color-scheme: light dark;
 }
 [data-theme="dark"]{
   --bg:#0c1220; --surface:#203047; --text:#f1f5f9; --muted:#d1d9e6; --line:#597299;
@@ -25,7 +42,11 @@ html,body{margin:0;background:var(--bg);color:var(--text);
 
 /* ===== NAV ===== */
 .nav{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
-.nav .wrap{position:relative;max-width:1140px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
+.nav .wrap{
+  position:relative;max-width:1140px;margin:0 auto;
+  padding:14px max(16px, env(safe-area-inset-right)) 14px max(16px, env(safe-area-inset-left));
+  display:flex;align-items:center;gap:18px
+}
 .brand{display:flex;align-items:center;gap:6px;font-weight:700;color:var(--text);text-decoration:none;flex-wrap:wrap}
 .brand-left{white-space:nowrap}
 .brand-right{white-space:nowrap}
@@ -41,7 +62,11 @@ html,body{margin:0;background:var(--bg);color:var(--text);
 
 /* ===== HERO ===== */
 .hero{background:var(--gradient-hero);border-bottom:1px solid var(--line);padding:96px 0}
-.container{max-width:1140px;margin:0 auto;padding:0 20px}
+.container{
+  max-width:1140px;margin:0 auto;
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+}
 .grid{display:grid;grid-template-columns:1fr;gap:24px}
 @media(min-width:900px){.grid{grid-template-columns:1.1fr .9fr;align-items:center}}
 
@@ -72,16 +97,15 @@ h1{font-size:clamp(30px,4.6vw,50px);line-height:1.15;margin:12px 0 18px;
 
 /* ===== MOBILE Tweaks ===== */
 @media(max-width:640px){
-  /* розміщуємо місяць у межах навбара і резервуємо місце табам */
   .mode{position:absolute;top:8px;right:12px;z-index:3}
   .nav ul{margin-right:56px}
-  /* заголовки та текст трохи менші, фото ховаємо */
+  .hero{padding:64px 0}
+  .section{padding:48px 0}
   h1{font-size:clamp(24px,8vw,34px);line-height:1.2;margin:8px 0 12px}
   .lead{font-size:16px}
   .photo{display:none}
 }
 </style>
-</head>
 
   <title>QA Portfolio — Tania</title>
 </head>
@@ -124,7 +148,7 @@ h1{font-size:clamp(30px,4.6vw,50px);line-height:1.15;margin:12px 0 18px;
   <script>
     // year
     document.getElementById('y') && (document.getElementById('y').textContent = new Date().getFullYear());
-    // theme init
+    // theme init (keeps in sync with bootstrap)
     const saved=localStorage.getItem('theme');
     const system=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const initial=saved || system; document.documentElement.setAttribute('data-theme', initial);
@@ -132,6 +156,8 @@ h1{font-size:clamp(30px,4.6vw,50px);line-height:1.15;margin:12px 0 18px;
     document.getElementById('mode')?.addEventListener('click',()=>{
       const root=document.documentElement; const cur=root.getAttribute('data-theme')||'light';
       const next= cur==='light'?'dark':'light'; root.setAttribute('data-theme', next); localStorage.setItem('theme', next);
+      // also sync background to avoid flash between navigations
+      root.style.backgroundColor = (next==='dark') ? '#0c1220' : '#ffffff';
     });
   </script>
 
