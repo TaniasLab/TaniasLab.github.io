@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QA Portfolio — Tania</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+  :root{
+    --bg:#ffffff; --surface:#f7fafc; --text:#0b1220; --muted:#5b6876; --line:#e7edf3; --chip:#eef4fb;
+    --brand:#2563eb; --brand-strong:#1e3a8a; --brand-soft:#3b82f6; --shadow:0 10px 30px rgba(2,8,23,.06);
+    --gradient-hero:linear-gradient(180deg, rgba(243,246,252,.96) 0%, #ffffff 100%);
+  }
+  [data-theme="dark"]{
+    --bg:#0c1220; --surface:#203047; --text:#f1f5f9; --muted:#d1d9e6; --line:#597299; --chip:#2a3f60; --shadow:0 10px 30px rgba(0,0,0,.6);
+    --brand:#74a7ff; --brand-strong:#b3d4ff; --brand-soft:#9cc2ff; --gradient-hero:linear-gradient(180deg,#304667 0%,#101a2b 100%);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial;transition:background .3s,color .3s}
+  a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+  .nav .wrap{max-width:1140px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--text);text-decoration:none}
+  .brand:hover{opacity:.9}
+  .brand .dot{width:10px;height:10px;border-radius:999px;background:var(--brand)}
+  .nav ul{margin-left:auto;margin-right:8px;display:flex;gap:14px;list-style:none;padding:0}
+  .nav a{font-weight:600;color:var(--text)}
+  .nav .tab{padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:12px;box-shadow:0 1px 2px rgba(2,8,23,.06)}
+  .nav .tab:hover{background:var(--surface)}
+  .nav .tab.active{border-color:var(--brand);font-weight:700}
+  [data-theme="dark"] .nav .tab{background:#0f172a;border-color:#2a3f60}
+  [data-theme="dark"] .nav .tab.active{border-color:#74a7ff}
+  .mode{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;margin-left:0;border:2px solid rgba(15,23,42,.15);background:#fff;border-radius:14px;padding:0;cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s;color:#f4c914;box-shadow:0 1px 3px rgba(0,0,0,.06), inset 0 0 0 1px rgba(255,255,255,.6)}
+  .mode:hover{box-shadow:0 6px 18px rgba(2,8,23,.14)}
+  [data-theme="dark"] .mode{border-color:#2a3f60;background:#0f172a;color:#f4d24f;box-shadow:inset 0 0 0 1px rgba(17,24,39,.6)}
+  .icon-moon{display:block;fill:currentColor}
+
+  .container{max-width:1140px;margin:0 auto;padding:28px 20px}
+  .hero{background:var(--gradient-hero);border-bottom:1px solid var(--line);padding:96px 0}
+  .grid{display:grid;grid-template-columns:1fr;gap:24px}
+  @media(min-width:900px){.grid{grid-template-columns:1.1fr .9fr}}
+
+  .eyebrow{font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--brand-soft);text-transform:uppercase}
+  h1{font-size:clamp(30px,4.6vw,50px);line-height:1.15;margin:12px 0 18px;font-weight:800;background:linear-gradient(90deg,var(--brand-strong),var(--brand));-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 1px 0 rgba(0,0,0,.15))}
+  .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:920px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--text);padding:12px 16px;border-radius:12px;font-weight:600}
+  .btn.selected{background:var(--brand);border-color:transparent;color:#fff}
+
+  .photo{border:2px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;background:radial-gradient(90% 100% at 100% 0%, var(--surface) 0%, transparent 60%);aspect-ratio:3/4;width:100%;max-width:420px;min-height:520px;justify-self:center}
+  .photo span{color:var(--muted)}
+
+  .section{padding:60px 0;border-bottom:1px solid var(--line)}
+  .section h2{font-size:clamp(26px,3vw,34px);margin:0 0 10px}
+  .section .sub{color:var(--muted);margin:0 0 24px}
+  .cards{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:900px){.cards{grid-template-columns:1fr 1fr 1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;color:var(--text)}
+
+  .foot{padding:28px 0;color:var(--muted);font-size:14px}
+  .top{display:none!important}
+
+  @media(min-width:1100px){ h1{font-size:clamp(32px,4.2vw,52px)} .hero{padding:72px 0} .photo{max-width:420px;min-height:540px} }
+  @media(max-width:640px){
+    .container{padding:18px 16px}
+    .nav .wrap{gap:10px}
+    .brand{font-size:16px}
+    .nav ul{gap:14px;overflow:auto;white-space:nowrap}
+    .nav a{font-size:15px}
+    .mode{position:fixed;top:10px;right:12px;z-index:20}
+    h1{font-size:clamp(24px,8vw,34px);line-height:1.2;margin:8px 0 12px}
+    .lead{font-size:16px}
+    .cta .btn{width:100%;justify-content:space-between}
+    .photo{display:none}
+  }
+</style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="dot"></span> Tania • QA & Marketing</a>
+      <ul>
+        <li><a class="tab active" href="qa.html">QA</a></li>
+        <li><a class="tab" href="marketing.html">Marketing</a></li>
+      </ul>
+      <button class="mode" id="mode" aria-label="Toggle theme" title="Toggle theme">
+        <svg class="icon-moon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">Portfolio • QA Engineering</div>
+      <h1>Practical QA that protects business‑critical flows.</h1>
+      <p class="lead">Manual web &amp; API testing, exploratory &amp; risk‑based approach, clear bug reports and CI‑ready mindset.</p>
+
+    </div>
+  </header>
+
+  <section class="section container">
+    <h2>Selected QA work</h2>
+    <p class="sub">Outcome‑oriented examples. No sensitive client details.</p>
+    <div class="cards">
+      <article class="card"><h3>Checkout flow — functional test suite</h3><p class="meta">Web • E‑commerce • Payments</p><p><strong>Context:</strong> Intermittent failures in promo/receipt paths.<br><strong>What I did:</strong> Risk‑based suite for cart → checkout → confirmation, including negative paths.<br><strong>Tools:</strong> Postman, DevTools, TestRail.<br><strong>Result:</strong> −30% support tickets у 2 спринти.</p></article>
+      <article class="card"><h3>API smoke & contract checks</h3><p class="meta">API • JSON • Environments</p><p><strong>Context:</strong> Schema drift між сервісами.<br><strong>What I did:</strong> Postman collections із assertions & mock servers для edge‑кейсів.<br><strong>Result:</strong> Breaking change спійманий до релізу; ручний регрес −40%.</p></article>
+      <article class="card"><h3>Bug report gallery (before → after)</h3><p class="meta">Clarity • Reproducibility • Impact</p><p><strong>Context:</strong> Повільні фікси через неясні тікети.<br><strong>What I did:</strong> Чіткі шаблони: кроки, expected vs actual, severity, attachments, env.<br><strong>Result:</strong> 2× швидше time‑to‑fix для P2‑P3.</p></article>
+    </div>
+  </section>
+
+  <footer class="container foot">
+    <p>© <span id="y"></span> Tania • Portfolio for Upwork use. No direct contact links.</p>
+  </footer>
+  
+  <script>
+    // Year
+    document.getElementById('y') && (document.getElementById('y').textContent = new Date().getFullYear());
+    // Theme init
+    const saved=localStorage.getItem('theme');
+    const system=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initial=saved || system; document.documentElement.setAttribute('data-theme', initial);
+    // Toggle
+    document.getElementById('mode')?.addEventListener('click',()=>{
+      const root=document.documentElement; const cur=root.getAttribute('data-theme')||'light';
+      const next= cur==='light'?'dark':'light'; root.setAttribute('data-theme', next); localStorage.setItem('theme', next);
+    });
+  </script>
+
+</body>
+</html>
